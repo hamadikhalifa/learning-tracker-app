@@ -30,7 +30,7 @@
 ### Installation
 
 ```bash
-git clone https://github.com/hamadikhalifa/my-annual-budget.git
+git clone https://github.com/hamadikhalifa/learning-tracker-app.git
 cd my-annual-budget
 npm install
 npm run dev
