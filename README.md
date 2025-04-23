@@ -35,7 +35,8 @@ cd learning-tracker-app
 npm install
 npm run dev
 
-##Folder structure
+
+ ### **folder structure**
 learning-tracker-app/
 ├── public/
 │   └── index.html
