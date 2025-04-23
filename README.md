@@ -36,26 +36,4 @@ npm install
 npm run dev
 
 
- ### **folder structure**
-learning-tracker-app/
-├── public/
-│   └── index.html
-├── src/
-│   ├── components/
-│   │   └── MainLayout.jsx
-│   ├── pages/
-│   │   ├── Home.jsx
-│   │   ├── Topics.jsx
-│   │   ├── Goals.jsx
-│   │   └── Progress.jsx
-│   ├── router.js
-│   ├── main.jsx
-│   └── index.css
-├── tailwind.config.js
-├── postcss.config.cjs
-├── vite.config.js
-├── package.json
-└── README.md
-
-##Author
-@hamadikhalifa
+ 
