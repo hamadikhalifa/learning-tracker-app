@@ -1,36 +1,36 @@
-# My Annual Budget
+# Learning Tracker App
 
-*A modern web app to manage yearly budgets, track spending categories, plan shopping lists, and visualize expenses with charts.*
+Welcome to the *Learning Tracker App* — a simple and efficient way to track your learning progress, set goals, and stay motivated throughout your learning journey.
+
 
 ## Features
 
-- Create custom annual or event-based budgets
-- Add, edit, and delete categorized expenses
-- Manage a smart shopping list with item prices
-- Track remaining budget in real time
-- Visualize expenses using charts and summaries
-- Highlight overspending for easy insights
-- Local storage support (or optional backend)
+- *Home Page*: Introductory section with a welcoming message.
+- *Topics Page*: View a list of learning topics you're currently exploring.
+- *Goals Page*: Set and track your short-term and long-term learning goals.
+- *Progress Page*: Monitor your progress and see what you've accomplished so far.
+- *Responsive Design* using Tailwind CSS.
+- *Smooth Routing* with React Router.
+- *Notifications* with React Toastify.
 
 ## Tech Stack
 
-- *Frontend:* React, Tailwind CSS, Vite
-- *State Management:* useState, useEffect (optional: Zustand/Context)
-- *Notifications:* Toastify or SweetAlert
-- *Charts:* Recharts or Chart.js
-- *Storage:* localStorage (Firebase or backend optional)
-
-- npm
+- React
+- React Router DOM
+- Tailwind CSS
+- React Toastify
+- Vite
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js (v16 or higher)
+- Node.js & npm installed
+
 ### Installation
 
 ```bash
 git clone https://github.com/hamadikhalifa/learning-tracker-app.git
-cd my-annual-budget
+cd learning-tracker-app
 npm install
 npm run dev
