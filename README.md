@@ -35,5 +35,6 @@ cd learning-tracker-app
 npm install
 npm run dev
 
-
+## Author
+@hamadikhalifa
  
