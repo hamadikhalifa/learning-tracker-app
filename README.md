@@ -34,7 +34,4 @@ git clone https://github.com/hamadikhalifa/learning-tracker-app.git
 cd learning-tracker-app
 npm install
 npm run dev
-
-## Author
-@hamadikhalifa
  
