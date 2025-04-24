@@ -1,6 +1,6 @@
 # Learning Tracker App
 
-[Click here to view the app](https://learning-tracker-app.vercel.app)
+[Click here to view the app](http://learning-tracker-app-9vgh.vercel.app/)
 
 Welcome to the *Learning Tracker App*, a simple and intuitive React application designed to help users monitor their learning goals, explore topics, and track their progress effectively.
 
