@@ -1,52 +1,38 @@
 # Learning Tracker App
 
-[Click here to view the app](http://learning-tracker-app-9vgh.vercel.app/)
-
-Welcome to the *Learning Tracker App*, a simple and intuitive React application designed to help users monitor their learning goals, explore topics, and track their progress effectively.
+A simple and elegant web app to track your learning topics, goals, and progress. Built with React, React Router, and Tailwind CSS.
 
 ---
 
 ## Features
 
-- *Home* – Introduction to the app  
-- *Topics* – Displays a list of learning topics  
-- *Goals* – Users can view or set learning goals  
-- *Progress* – Track your learning achievements  
+- Add and manage *learning topics*
+- Create, mark, and filter *learning goals*
+- View a *visual progress chart*
+- Animated UI elements and tabbed navigation
+- Data persists in *localStorage*
+- Responsive design for mobile and desktop
 
 ---
 
-### Getting Started
+## Technologies Used
 
-Follow the instructions below to run the app locally:
+- *React*
+- *React Router v6*
+- *Tailwind CSS*
+- *Chart.js* (or Recharts if you're using it)
 
+---
+
+## Installation
 ```bash
 git clone https://github.com/hamadikhalifa/learning-tracker-app.git
 cd learning-tracker-app
 npm install
 npm run dev
 
----
-
-### folder structure
-
-learning-tracker-app/
-├── public/
-│   └── index.html
-├── src/
-│   ├── components/
-│   │   ├── Home.jsx
-│   │   ├── Topics.jsx
-│   │   ├── Goals.jsx
-│   │   └── Progress.jsx
-│   ├── App.jsx
-│   ├── main.jsx
-│   └── index.css
-├── .gitignore
-├── package.json
-└── README.md
 
 ---
 
 ### author
-
-@hamadikhalifa
+hamadi khalifa
