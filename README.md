@@ -51,7 +51,7 @@ Watch Live
 
 Experience the app live at:
 
-https://your-deployment-url.com
+https://learning-tracker-app-h8yw.vercel.app
 
 
 ---
