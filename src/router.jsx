@@ -4,16 +4,18 @@ import Home from "./pages/Home";
 import Topics from "./pages/Topics";
 import Goals from "./pages/Goals";
 import Progress from "./pages/Progress";
+import NotFound from "./notFound";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
     children: [
-      { index: true, element: <Home /> },
-      { path: "topics", element: <Topics /> },
-      { path: "goals", element: <Goals /> },
-      { path: "progress", element: <Progress /> },
+      { path: "/", element: <Home /> },
+      { path: "/topics", element: <Topics /> },
+      { path: "/goals", element: <Goals /> },
+      { path: "/progress", element: <Progress /> },
+      { path: "*", element: <NotFound /> }, // This catches all unmatched routes
     ],
   },
 ]);

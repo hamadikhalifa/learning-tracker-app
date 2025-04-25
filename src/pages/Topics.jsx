@@ -1,28 +1,68 @@
 import { useState, useEffect } from "react";
+import { BookOpen, Server, RefreshCw, Globe } from "lucide-react";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Import toastify CSS
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Topics() {
   const [progress, setProgress] = useState({});
+  const [isInitialized, setIsInitialized] = useState(false);
 
+  // Topics data
   const topics = [
-    { id: 1, title: "React Basics", description: "Components, props, and state.", color: "bg-blue-100" },
-    { id: 2, title: "React Router", description: "Navigation and dynamic routes.", color: "bg-green-100" },
-    { id: 3, title: "State Management", description: "useState, useReducer, and Context API.", color: "bg-yellow-100" },
-    { id: 4, title: "API Integration", description: "Fetching and displaying data.", color: "bg-purple-100" },
+    {
+      id: 1,
+      title: "React Basics",
+      description: "Components, props, and state.",
+      icon: <BookOpen className="h-6 w-6 text-blue-600" />,
+      color: "bg-blue-50",
+    },
+    {
+      id: 2,
+      title: "React Router",
+      description: "Navigation and dynamic routes.",
+      icon: <Globe className="h-6 w-6 text-green-600" />,
+      color: "bg-green-50",
+    },
+    {
+      id: 3,
+      title: "State Management",
+      description: "useState, useReducer, and Context API.",
+      icon: <RefreshCw className="h-6 w-6 text-yellow-600" />,
+      color: "bg-yellow-50",
+    },
+    {
+      id: 4,
+      title: "API Integration",
+      description: "Fetching and displaying data.",
+      icon: <Server className="h-6 w-6 text-purple-600" />,
+      color: "bg-purple-50",
+    },
   ];
 
+  // Load progress from localStorage
   useEffect(() => {
-    const storedProgress = localStorage.getItem("topicProgress");
-    if (storedProgress) {
-      setProgress(JSON.parse(storedProgress));
+    try {
+      const storedProgress = localStorage.getItem("topicProgress");
+      if (storedProgress) setProgress(JSON.parse(storedProgress));
+    } catch (error) {
+      console.error("Failed to load progress from localStorage:", error);
+    } finally {
+      setIsInitialized(true);
     }
   }, []);
 
+  // Save progress to localStorage
   useEffect(() => {
-    localStorage.setItem("topicProgress", JSON.stringify(progress));
-  }, [progress]);
+    if (isInitialized) {
+      try {
+        localStorage.setItem("topicProgress", JSON.stringify(progress));
+      } catch (error) {
+        console.error("Failed to save progress to localStorage:", error);
+      }
+    }
+  }, [progress, isInitialized]);
 
+  // Handle progress update
   const handleStart = (id) => {
     setProgress((prev) => {
       const updated = {
@@ -35,31 +75,46 @@ export default function Topics() {
   };
 
   return (
-    <div className="px-4 py-6">
-      <h2 className="text-2xl font-bold mb-6 text-center">Topics to Explore</h2>
+    <div className="px-4 py-8">
+      {/* Page Heading */}
+      <h2 className="text-3xl font-bold text-center mb-8 text-blue-700">
+        Topics to Explore
+      </h2>
 
+      {/* Topics Grid */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {topics.map((topic) => (
           <div
             key={topic.id}
-            className={`p-6 rounded-2xl shadow border ${topic.color} transition-all`}
+            className={`p-6 rounded-2xl border shadow-md transition-all hover:shadow-xl ${topic.color}`}
           >
-            <h3 className="text-xl font-semibold mb-2">{topic.title}</h3>
+            {/* Topic Header */}
+            <div className="flex items-center gap-3 mb-4">
+              {topic.icon}
+              <h3 className="text-xl font-semibold">{topic.title}</h3>
+            </div>
+
+            {/* Topic Description */}
             <p className="text-gray-700 mb-4">{topic.description}</p>
 
+            {/* Progress Bar */}
             <div className="h-3 bg-gray-300 rounded-full mb-2">
               <div
                 className="h-3 bg-blue-600 rounded-full transition-all"
                 style={{ width: `${progress[topic.id] || 0}%` }}
-              ></div>
+              />
             </div>
-            <p className="text-sm text-gray-600 mb-2">
+
+            {/* Progress Percentage */}
+            <p className="text-sm text-gray-600 mb-3">
               {progress[topic.id] || 0}% Complete
             </p>
 
+            {/* Start Learning Button */}
             <button
               onClick={() => handleStart(topic.id)}
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full"
+              className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+              aria-label={`Start learning ${topic.title}`}
             >
               Start Learning
             </button>
