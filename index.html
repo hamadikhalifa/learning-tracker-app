@@ -1,13 +1,55 @@
-<!DOCTYPE html>
+<!DOCTYPE html> html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Learning Tracker App</title>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background: linear-gradient(to bottom, #f3f4f6, #e5e7eb);
+        color: #374151;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Add a subtle animation to the gradient background */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #e0f7fa, #e3f2fd, #ede7f6);
+        background-size: 400% 400%;
+        animation: gradientAnimation 15s ease infinite;
+        z-index: -1;
+      }
+
+      @keyframes gradientAnimation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+    </style>
   </head>
-  <body>
-    <div id="root"></div>
+  <body class="bg-gradient-to-br from-indigo-50 via-white to-blue-50">
+    <div id="root" class="p-6 space-y-6"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -8,8 +8,9 @@ import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    {/* Add a global context or theme provider here if needed */}
     <RouterProvider router={router} />
-    <ToastContainer 
+    <ToastContainer
       position="top-right"
       autoClose={3000}
       hideProgressBar={false}
@@ -19,6 +20,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       pauseOnFocusLoss
       draggable
       pauseOnHover
+      theme="colored" // Added theme for better visuals
     />
   </React.StrictMode>
 );

@@ -66,120 +66,92 @@ export default function Progress() {
   };
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-semibold mb-4">Track Your Progress</h2>
+    <div className="p-4 bg-gradient-to-br from-gray-100 to-gray-200 min-h-screen">
+      <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+        Track Your Progress
+      </h2>
 
       {/* Filter Buttons */}
       <div className="mb-4 flex flex-wrap gap-2">
         <button
           onClick={() => setFilter("all")}
-          className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+          className="px-4 py-2 rounded-lg shadow-md bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-2 focus:ring-gray-400 transition-all"
         >
           All
         </button>
         <button
           onClick={() => setFilter("completed")}
-          className="px-3 py-1 bg-green-200 rounded hover:bg-green-300"
+          className="px-4 py-2 rounded-lg shadow-md bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-400 transition-all"
         >
           Completed
         </button>
         <button
           onClick={() => setFilter("pending")}
-          className="px-3 py-1 bg-yellow-200 rounded hover:bg-yellow-300"
+          className="px-4 py-2 rounded-lg shadow-md bg-yellow-500 text-white hover:bg-yellow-600 focus:ring-2 focus:ring-yellow-400 transition-all"
         >
           Pending
         </button>
         <button
           onClick={() => setFilter("work")}
-          className="px-3 py-1 bg-blue-200 rounded hover:bg-blue-300"
+          className="px-4 py-2 rounded-lg shadow-md bg-blue-500 text-white hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 transition-all"
         >
           Work
         </button>
         <button
           onClick={() => setFilter("personal")}
-          className="px-3 py-1 bg-pink-200 rounded hover:bg-pink-300"
+          className="px-4 py-2 rounded-lg shadow-md bg-red-500 text-white hover:bg-red-600 focus:ring-2 focus:ring-red-400 transition-all"
         >
           Personal
         </button>
         <button
           onClick={resetFilters}
-          className="px-3 py-1 bg-gray-300 rounded hover:bg-gray-400"
+          className="px-4 py-2 rounded-lg shadow-md bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-2 focus:ring-gray-400 transition-all"
         >
           Reset Filter
         </button>
         <button
           onClick={clearAllGoals}
-          className="px-3 py-1 bg-red-200 rounded hover:bg-red-300"
+          className="px-4 py-2 rounded-lg shadow-md bg-red-500 text-white hover:bg-red-600 focus:ring-2 focus:ring-red-400 transition-all"
         >
           Clear All Goals
         </button>
       </div>
 
-      {/* Progress Chart */}
+      {/* Pie Chart */}
       <div className="mb-6">
-        <p className="mb-2 font-medium">Progress: {percentage}%</p>
-        <div className="w-40 h-40">
-          <Pie data={data} />
-        </div>
-      </div>
-
-      {/* Color Legend */}
-      <div className="mb-4">
-        <h3 className="font-semibold mb-1">Color Legend:</h3>
-        <ul className="text-sm">
-          <li>
-            <span className="inline-block w-3 h-3 bg-green-200 mr-2 rounded"></span>{" "}
-            Completed
-          </li>
-          <li>
-            <span className="inline-block w-3 h-3 bg-yellow-200 mr-2 rounded"></span>{" "}
-            Pending
-          </li>
-          <li>
-            <span className="inline-block w-3 h-3 bg-blue-200 mr-2 rounded"></span>{" "}
-            Work
-          </li>
-          <li>
-            <span className="inline-block w-3 h-3 bg-pink-200 mr-2 rounded"></span>{" "}
-            Personal
-          </li>
-        </ul>
+        <Pie data={data} />
       </div>
 
       {/* Goals List */}
-      <ul className="space-y-2">
+      <div className="space-y-4">
         <AnimatePresence>
           {filteredGoals.map((goal) => (
-            <motion.li
+            <motion.div
               key={goal.id}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 20 }}
-              transition={{ duration: 0.3 }}
-              layout
-              className={`flex items-center gap-2 p-2 rounded border shadow-sm ${
-                goal.completed ? "bg-green-50" : "bg-red-50"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              className={`p-4 rounded-lg shadow-md ${
+                goal.completed ? "bg-green-100" : "bg-yellow-100"
               }`}
             >
-              <input
-                type="checkbox"
-                checked={goal.completed}
-                onChange={() => toggleGoalStatus(goal.id)}
-              />
-              <span
-                className={
-                  goal.completed ? "line-through text-gray-500" : ""
-                }
-              >
-                {goal.text}
-              </span>
-            </motion.li>
+              <div className="flex justify-between items-center">
+                <span className="text-gray-800">{goal.text}</span>
+                <button
+                  onClick={() => toggleGoalStatus(goal.id)}
+                  className={`px-3 py-1 rounded-lg text-sm ${
+                    goal.completed
+                      ? "bg-green-500 text-white hover:bg-green-600"
+                      : "bg-yellow-500 text-white hover:bg-yellow-600"
+                  }`}
+                >
+                  {goal.completed ? "Mark Pending" : "Mark Completed"}
+                </button>
+              </div>
+            </motion.div>
           ))}
         </AnimatePresence>
-        {filteredGoals.length === 0 && (
-          <p className="text-gray-500 italic">No goals found.</p>
-        )}
-      </ul>
+      </div>
     </div>
   );
 }

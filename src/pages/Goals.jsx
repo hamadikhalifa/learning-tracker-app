@@ -80,116 +80,125 @@ export default function Goals() {
   });
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
-      <div className="bg-white rounded-xl shadow-md p-6 space-y-6">
-        <h2 className="text-2xl font-bold text-gray-800">Your Goals</h2>
+    <div className="min-h-screen bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100">
+      <header className="bg-indigo-600 text-white py-4 shadow-md">
+        <h1 className="text-center text-3xl font-bold">Learning Tracker</h1>
+      </header>
+      <div className="max-w-3xl mx-auto p-6">
+        <div className="bg-white rounded-xl shadow-md p-6 space-y-6">
+          <h2 className="text-2xl font-bold text-gray-800">Your Goals</h2>
 
-        <form onSubmit={handleAddGoal} className="flex flex-col sm:flex-row gap-3">
-          <input
-            type="text"
-            value={goal}
-            onChange={(e) => setGoal(e.target.value)}
-            placeholder="Enter your goal"
-            className="border px-3 py-2 rounded w-full"
-          />
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="border px-3 py-2 rounded"
-          >
-            <option>Personal</option>
-            <option>Work</option>
-            <option>Study</option>
-            <option>Other</option>
-          </select>
-          <button
-            type="submit"
-            className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 flex items-center gap-2"
-          >
-            <PlusCircle size={18} />
-            Add
-          </button>
-        </form>
+          <form onSubmit={handleAddGoal} className="flex flex-col sm:flex-row gap-3">
+            <input
+              type="text"
+              value={goal}
+              onChange={(e) => setGoal(e.target.value)}
+              placeholder="Enter your goal"
+              className="border px-3 py-2 rounded w-full focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            >
+              <option>Personal</option>
+              <option>Work</option>
+              <option>Study</option>
+              <option>Other</option>
+            </select>
+            <button
+              type="submit"
+              className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 flex items-center gap-2 shadow-md"
+            >
+              <PlusCircle size={18} />
+              Add
+            </button>
+          </form>
 
-        {/* Filters & Sorting */}
-        <div className="flex flex-col sm:flex-row justify-between gap-4">
-          <motion.div
-            initial={{ opacity: 0, y: -5 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <label className="mr-2 font-medium text-gray-700 flex items-center gap-2">
-              <Filter size={16} />
-              Filter:
-              <select
-                value={filter}
-                onChange={(e) => setFilter(e.target.value)}
-                className="ml-2 border px-2 py-1 rounded"
-              >
-                <option>All</option>
-                <option>Completed</option>
-                <option>Pending</option>
-              </select>
-            </label>
-          </motion.div>
+          {/* Filters & Sorting */}
+          <div className="flex flex-col sm:flex-row justify-between gap-4">
+            <motion.div
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <label className="mr-2 font-medium text-gray-700 flex items-center gap-2">
+                <Filter size={16} />
+                Filter:
+                <select
+                  value={filter}
+                  onChange={(e) => setFilter(e.target.value)}
+                  className="ml-2 border px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option>All</option>
+                  <option>Completed</option>
+                  <option>Pending</option>
+                </select>
+              </label>
+            </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: -5 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.1 }}
-          >
-            <label className="font-medium text-gray-700 flex items-center gap-2">
-              <SortAsc size={16} />
-              Sort:
-              <select
-                value={sort}
-                onChange={(e) => setSort(e.target.value)}
-                className="ml-2 border px-2 py-1 rounded"
-              >
-                <option>Newest</option>
-                <option>Oldest</option>
-                <option>A-Z</option>
-                <option>Z-A</option>
-              </select>
-            </label>
-          </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
+            >
+              <label className="font-medium text-gray-700 flex items-center gap-2">
+                <SortAsc size={16} />
+                Sort:
+                <select
+                  value={sort}
+                  onChange={(e) => setSort(e.target.value)}
+                  className="ml-2 border px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option>Newest</option>
+                  <option>Oldest</option>
+                  <option>A-Z</option>
+                  <option>Z-A</option>
+                </select>
+              </label>
+            </motion.div>
+          </div>
+
+          <ul className="space-y-4">
+            <AnimatePresence>
+              {sortedGoals.map((goal) => (
+                <motion.li
+                  key={goal.id}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                  className={`flex justify-between items-center p-4 rounded-lg shadow-lg bg-white ${
+                    categoryColors[goal.category]} ${
+                    goal.completed ? "opacity-60 line-through" : ""
+                  }`}
+                >
+                  <span>{goal.text}</span>
+                  <div className="flex gap-3 items-center">
+                    <button
+                      onClick={() => toggleComplete(goal.id)}
+                      className="text-green-600 hover:text-green-800"
+                      title="Toggle complete"
+                    >
+                      <CheckCircle size={20} />
+                    </button>
+                    <button
+                      onClick={() => handleDeleteGoal(goal.id)}
+                      className="text-red-500 hover:text-red-700"
+                      title="Delete goal"
+                    >
+                      <Trash2 size={20} />
+                    </button>
+                  </div>
+                </motion.li>
+              ))}
+            </AnimatePresence>
+          </ul>
         </div>
-
-        <ul className="space-y-4">
-          <AnimatePresence>
-            {sortedGoals.map((goal) => (
-              <motion.li
-                key={goal.id}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.2 }}
-                className={`flex justify-between items-center p-4 rounded-lg shadow ${categoryColors[goal.category]} ${
-                  goal.completed ? "opacity-60 line-through" : ""
-                }`}
-              >
-                <span>{goal.text}</span>
-                <div className="flex gap-3 items-center">
-                  <button
-                    onClick={() => toggleComplete(goal.id)}
-                    className="text-green-600 hover:text-green-800"
-                    title="Toggle complete"
-                  >
-                    <CheckCircle size={20} />
-                  </button>
-                  <button
-                    onClick={() => handleDeleteGoal(goal.id)}
-                    className="text-red-500 hover:text-red-700"
-                    title="Delete goal"
-                  >
-                    <Trash2 size={20} />
-                  </button>
-                </div>
-              </motion.li>
-            ))}
-          </AnimatePresence>
-        </ul>
       </div>
+      <footer className="bg-gray-800 text-white py-4 mt-6">
+        <p className="text-center text-sm">© 2025 Learning Tracker App</p>
+      </footer>
     </div>
   );
 }
