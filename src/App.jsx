@@ -1,30 +1,24 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { lazy, Suspense } from "react";
-import MainLayout from "./layouts/MainLayout";
-import LoadingSpinner from "./components/LoadingSpinner"; // Custom loading spinner component
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MainLayout from "./components/MainLayout";
+import HomePage from "./pages/HomePage";
+import TopicsPage from "./pages/TopicsPage";
+import GoalsPage from "./pages/GoalsPage";
+import ProgressPage from "./pages/ProgressPage";
 
-const Home = lazy(() => import("./pages/Home"));
-const Topics = lazy(() => import("./pages/Topics"));
-const Goals = lazy(() => import("./pages/Goals"));
-const Progress = lazy(() => import("./pages/Progress"));
-const NotFound = lazy(() => import("./pages/NotFound"));
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <MainLayout />,
-    children: [
-      { index: true, element: <Suspense fallback={<LoadingSpinner />}><Home /></Suspense> },
-      { path: "topics", element: <Suspense fallback={<LoadingSpinner />}><Topics /></Suspense> },
-      { path: "goals", element: <Suspense fallback={<LoadingSpinner />}><Goals /></Suspense> },
-      { path: "progress", element: <Suspense fallback={<LoadingSpinner />}><Progress /></Suspense> },
-      { path: "*", element: <Suspense fallback={<LoadingSpinner />}><NotFound /></Suspense> },
-    ],
-  },
-]);
-
-function App() {
-  return <RouterProvider router={router} />;
-}
+const App = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* Main layout with nested routes */}
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="topics" element={<TopicsPage />} />
+          <Route path="goals" element={<GoalsPage />} />
+          <Route path="progress" element={<ProgressPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
 export default App;
